@@ -1,20 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import { Component } from 'react';
+import { View } from 'react-native';
+import { container } from './static/styles';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Stack = createNativeStackNavigator();
+
+export class App extends Component {
+  constructor(props) {
+    super()
+    this.state = {
+      loaded: false,
+    }
+  }
+
+  componentDidMount() {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        this.setState({ loggedIn: true, loaded: true })
+      } else {
+        this.setState({ loggedIn: false, loaded: true })
+      }
+    });
+  }
+
+  render() {
+    if (!this.state.loaded) {
+      return (
+        <View style={container.splash}>
+        </View>
+      )
+    }
+
+    if (!this.state.loggedIn) {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='Login'>
+            <Stack.Screen name="Login" component={Login} nagvigation={this.props.navigation} options={{ headerShown: false }} />
+            <Stack.Screen name="Register" component={Register} nagvigation={this.props.navigation} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
+
+    return (
+      <View style={{flex: 1, backgroundColor: 'yellow'}}>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
