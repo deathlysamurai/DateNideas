@@ -8,7 +8,10 @@ expo login
 expo start
 ```
 
-### Creating App:
+### Firebase Project Screen
+https://console.firebase.google.com/u/0/project/date-nideas/overview
+
+### Commands used when creating App:
 Required commands when creating app
 - install native navigation
 ```
@@ -22,15 +25,19 @@ npx expo install react-native-screens react-native-safe-area-context
 ```
 npm install @react-navigation/native-stack
 ```
--install Safe Area View
+- install Safe Area View
 ```
 npx expo install react-native-safe-area-view
 ```
--install firebase
+- install firebase
 ```
 expo install firebase
 ```
--install react native paper
+- install react native paper
 ```
 npm install react-native-paper
+```
+- install Bottom Tabs
+```
+npm install @react-navigation/bottom-tabs
 ```

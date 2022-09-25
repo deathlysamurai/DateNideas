@@ -4,7 +4,7 @@ import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { container, button, form, text } from '../../static/styles';
 
-export default function Login(props) {
+export default function LoginScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

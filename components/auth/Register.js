@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { container, button, form, text } from '../../static/styles';
 import { Snackbar } from 'react-native-paper';
 
-export default function Register(props) {
+export default function RegisterScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
