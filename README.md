@@ -41,3 +41,13 @@ npm install react-native-paper
 ```
 npm install @react-navigation/bottom-tabs
 ```
+- install Drawer Navigation
+```
+npm install @react-navigation/drawer
+npx expo install react-native-gesture-handler react-native-reanimated
+```
+-install Top Tab Navigation
+```
+npm install @react-navigation/material-top-tabs react-native-tab-view
+npx expo install react-native-pager-view
+```

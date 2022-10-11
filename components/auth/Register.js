@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { container, button, form, text } from '../../static/styles';
 import { Snackbar } from 'react-native-paper';
+import { firebase } from '../../database/functions';
 
 export default function RegisterScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [isValid, setIsValid] = useState(true);
 
   const handleRegister = () => {
-    if (email.length == 0 || password.length == 0) {
+    if (email.length == 0 || password.length == 0 || name.length == 0) {
         setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
         return;
     }
 
-    createUserWithEmailAndPassword(auth, email, password)
+    firebase.user.registerUser(email, password, name);
   }
 
   return (
@@ -26,6 +26,12 @@ export default function RegisterScreen(props) {
     >
       <View style={container.inputContainer}>
         <Text style={text.headerText}>Register</Text>
+        <TextInput
+          placeholder="Name"
+          value={name}
+          onChangeText={text => setName(text)}
+          style={form.input}
+        />
         <TextInput
           placeholder="Email"
           value={email}

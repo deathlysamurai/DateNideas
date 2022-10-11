@@ -7,7 +7,7 @@ const container = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.darkBackground,
+        backgroundColor: colors.lightBackground,
     },
     inputContainer: {
         width: '80%',
@@ -50,11 +50,14 @@ const button = StyleSheet.create({
         fontWeight: '700',
         fontSize: fontSizes.button,
     },
+    headerRightButton: {
+        marginRight: 10,
+    }
 });
 
 const form = StyleSheet.create({
     input: {
-        backgroundColor: colors.lightBackground,
+        backgroundColor: colors.white,
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,
@@ -75,14 +78,14 @@ const text = StyleSheet.create({
         color: colors.accentPink,
     },
     headerText: {
-        color: colors.white,
+        color: colors.black,
         fontSize: fontSizes.header,
         fontWeight: 'bold',
         textAlign: 'center',
         margin: 10,
     },
     small: {
-        color: colors.white,
+        color: colors.black,
     }
 });
 

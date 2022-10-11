@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native';
 import { container } from '../../static/styles';
 
-export default function SearchScreen(props) {
+export default function SwipeScreen(props) {
 
   return (
     <View style={container.container}>
-        <Text>Search</Text>
+        <Text>Swipe</Text>
     </View>
   )
 }

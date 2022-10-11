@@ -1,16 +1,11 @@
 import { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { auth } from '../../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { container, button, form, text } from '../../static/styles';
+import { firebase } from '../../database/functions';
 
 export default function LoginScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-  }
 
   return (
     <View
@@ -36,7 +31,7 @@ export default function LoginScreen(props) {
 
       <View style={container.buttonContainer}>
         <TouchableOpacity
-          onPress={handleLogin}
+          onPress={() => firebase.user.loginUser(email, password)}
           style={button.mainButton}
         >
           <Text style={button.mainButtonText}>Login</Text>
