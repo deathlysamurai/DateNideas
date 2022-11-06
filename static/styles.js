@@ -89,4 +89,10 @@ const text = StyleSheet.create({
     }
 });
 
-export { container, button, form, text }
+const list = StyleSheet.create({
+    highlighted: {
+        borderWidth: 1,
+    }
+});
+
+export { container, button, form, text, list }

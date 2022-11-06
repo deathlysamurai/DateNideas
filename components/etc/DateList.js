@@ -9,8 +9,12 @@ export default function DateList(props) {
     const [dates, setDates] = useState(null);
 
     useEffect(() => {
-        firebase.date.getCurrentUserDates()
-        .then((dates) => { setDates(dates) });
+        if(props.filteredDates) {
+            setDates(props.filteredDates);
+        } else {
+            firebase.date.getCurrentUserDates()
+            .then((dates) => { setDates(dates) });
+        }
     });
 
     return (

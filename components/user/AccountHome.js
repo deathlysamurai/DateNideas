@@ -2,7 +2,6 @@ import UserDateListScreen from './DateList';
 import ChatScreen from './Chat';
 import InfoScreen from './Info';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Title } from 'react-native-paper';
 
 const Tab = createMaterialTopTabNavigator();
 
