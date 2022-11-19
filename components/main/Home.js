@@ -16,7 +16,9 @@ export default function HomeScreen(props) {
   useEffect(() => {
     firebase.user.getRequests()
     .then((requests) => {
-      setRequestCount(requests.length);
+      if(requests != null) {
+        setRequestCount(requests.length);
+      }
     });
   }, []);
 

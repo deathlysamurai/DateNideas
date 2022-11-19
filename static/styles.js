@@ -9,8 +9,12 @@ const container = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.lightBackground,
     },
+    scrollViewContainer: {
+        width: '100%',
+    },  
     inputContainer: {
         width: '80%',
+        maxHeight: '50%'
     },
     buttonContainer: {
         width: '60%',

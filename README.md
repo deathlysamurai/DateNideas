@@ -51,3 +51,7 @@ npx expo install react-native-gesture-handler react-native-reanimated
 npm install @react-navigation/material-top-tabs react-native-tab-view
 npx expo install react-native-pager-view
 ```
+-install Keyboard Aware Scroll View to help keyboard inputs remain visible
+```
+npm i react-native-keyboard-aware-scroll-view --save
+```

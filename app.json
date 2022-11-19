@@ -1,13 +1,12 @@
 {
   "expo": {
     "name": "DateNideas",
-    "slug": "DateNideas",
+    "slug": "datenideas-mh469768",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      // "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ef233c"
     },
@@ -28,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }

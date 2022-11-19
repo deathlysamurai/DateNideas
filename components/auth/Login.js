@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { container, button, form, text } from '../../static/styles';
 import { firebase } from '../../database/functions';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function LoginScreen(props) {
   const [email, setEmail] = useState('');
@@ -13,20 +14,24 @@ export default function LoginScreen(props) {
       behavior="padding"
     >
       <View style={container.inputContainer}>
-        <Text style={text.headerText}>Login</Text>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          style={form.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={form.input}
-          secureTextEntry
-        />
+        <KeyboardAwareScrollView
+          contentContainerStyle={container.scrollViewContainer}
+        >
+          <Text style={text.headerText}>Login</Text>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={text => setEmail(text)}
+            style={form.input}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={text => setPassword(text)}
+            style={form.input}
+            secureTextEntry
+          />
+        </KeyboardAwareScrollView>
       </View>
 
       <View style={container.buttonContainer}>

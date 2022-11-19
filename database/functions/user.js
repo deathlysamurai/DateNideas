@@ -4,7 +4,7 @@ import { collection, addDoc, setDoc, doc, getDoc, query, where, getDocs } from "
 
 export default class userFunctions {
     static loginUser(email, password) {
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email.trim(), password)
         .then((res) => {})
         .catch((err) => { 
             switch(err.code) {
@@ -40,6 +40,7 @@ export default class userFunctions {
     static async getCurrentUser() {
         try {
             const userSnapshot = await getDoc(doc(firestore, "users", auth.currentUser.uid));
+            console.log(auth.currentUser.uid);
             if(userSnapshot.exists()) {
                 return userSnapshot.data();
             }
