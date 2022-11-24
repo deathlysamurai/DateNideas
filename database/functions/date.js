@@ -1,5 +1,5 @@
 import { auth, firestore } from "../../database/firebase";
-import { collection, addDoc, setDoc, doc, getDoc, getDocs, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, getDoc, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 
 export default class dateFunctions {
     static async getCurrentUserDates() {
@@ -33,6 +33,19 @@ export default class dateFunctions {
             await deleteDoc(dateSnapshot.ref);
         } else {
             alert("Date not found.");
+        }
+    }
+
+    static async editDate(id, title) {
+        const userRef = doc(firestore, "users", auth.currentUser.uid);
+        const userDatesRef = collection(userRef, "dates");
+        const dateRef = doc(firestore, userDatesRef.path, id);
+        try {
+            await updateDoc(dateRef, {
+                title: title,
+            });
+        } catch(err) {
+            alert(err);
         }
     }
 }

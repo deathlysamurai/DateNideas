@@ -28,6 +28,13 @@ const container = StyleSheet.create({
         width: '100%',
         backgroundColor: colors.accentPink,
     },
+    dateContainer: {
+        padding: 10,
+        margin: 2,
+        borderWidth: 1,
+        borderRadius: 5,
+        minWidth: '80%',
+    },  
 });
 
 const button = StyleSheet.create({
@@ -90,6 +97,9 @@ const text = StyleSheet.create({
     },
     small: {
         color: colors.black,
+    },
+    center: {
+        textAlign: 'center',
     }
 });
 

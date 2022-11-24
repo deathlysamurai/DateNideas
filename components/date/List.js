@@ -14,7 +14,7 @@ export default function ListScreen(props) {
   return (
     <View style={container.container}>
         <DateFilters filterDates={filterDates} />
-        <DateList filteredDates={filteredDates} />
+        <DateList filteredDates={filteredDates} navigation={props.navigation} />
     </View>
   )
 }

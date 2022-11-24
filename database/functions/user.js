@@ -40,7 +40,6 @@ export default class userFunctions {
     static async getCurrentUser() {
         try {
             const userSnapshot = await getDoc(doc(firestore, "users", auth.currentUser.uid));
-            console.log(auth.currentUser.uid);
             if(userSnapshot.exists()) {
                 return userSnapshot.data();
             }

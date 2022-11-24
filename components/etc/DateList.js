@@ -19,8 +19,9 @@ export default function DateList(props) {
 
     return (
         <FlatList
+            contentContainerStyle={[container.container, container.scrollViewContainer]}
             data={dates}
-            renderItem={({ item }) => <DateListItem date={item} />}
+            renderItem={({ item }) => <DateListItem date={item} navigation={props.navigation} />}
         />
     )
 }

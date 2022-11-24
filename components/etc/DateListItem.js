@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { container, list } from '../../static/styles';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { container, list, text } from '../../static/styles';
 import { firebase } from '../../database/functions';
 
 export default function DateListItem(props) {
@@ -9,7 +8,7 @@ export default function DateListItem(props) {
 
     useEffect(() => {
         setDate(props.date);
-    }, []);
+    });
 
     const deleteDate = () => {
         firebase.date.deleteDate(date.id);
@@ -17,8 +16,12 @@ export default function DateListItem(props) {
 
     if(date) {
         return (
-            <View style={[container.container, list.highlighted]}>
-                <Text><Ionicons name="remove" size={24} color="red" onPress={deleteDate} /> {date.title}</Text>
+            <View style={container.dateContainer}>
+                <TouchableOpacity 
+                    onPress={() => props.navigation.navigate("EditDate", {date: date}) }
+                >
+                    <Text style={text.center}>{date.title}</Text>
+                </TouchableOpacity>
             </View>
         )
     }

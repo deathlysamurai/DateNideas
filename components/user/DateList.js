@@ -5,7 +5,7 @@ import DateList from '../etc/DateList';
 export default function UserDateListScreen(props) {
     return (
         <View style={container.container}>
-            <DateList />
+            <DateList navigation={props.navigation} />
             <TouchableOpacity 
                 style={button.mainButton}
                 onPress={() => props.navigation.navigate("AddDate")}>
