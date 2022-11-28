@@ -10,9 +10,9 @@ export default function DateListItem(props) {
         setDate(props.date);
     });
 
-    const deleteDate = () => {
-        firebase.date.deleteDate(date.id);
-    }
+    // const deleteDate = () => {
+    //     firebase.date.deleteDate(date.id);
+    // }
 
     if(date) {
         return (

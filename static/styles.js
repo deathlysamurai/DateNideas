@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
+import Card from "../components/date/Card";
 import { colors } from './colors';
 import { fontSizes } from "./fonts";
+import { CARD, SCREEN_WIDTH, SCREEN_HEIGHT } from "./variables";
 
 const container = StyleSheet.create({
     container: {
@@ -14,10 +16,16 @@ const container = StyleSheet.create({
     },  
     inputContainer: {
         width: '80%',
-        maxHeight: '50%'
     },
     buttonContainer: {
-        width: '60%',
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
+    },
+    addButtonContainer: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 40,
@@ -63,6 +71,15 @@ const button = StyleSheet.create({
     },
     headerRightButton: {
         marginRight: 10,
+    },
+    imageButton: {
+        backgroundColor: colors.white,
+        borderColor: colors.accentPink,
+        borderWidth: 2,
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginVertical: 10,
     }
 });
 
@@ -100,7 +117,10 @@ const text = StyleSheet.create({
     },
     center: {
         textAlign: 'center',
-    }
+    },
+    delete: {
+        color: colors.red,
+    },
 });
 
 const list = StyleSheet.create({
@@ -109,4 +129,26 @@ const list = StyleSheet.create({
     }
 });
 
-export { container, button, form, text, list }
+const image = StyleSheet.create({
+    dateImage: {
+        width: CARD.WIDTH,
+        height: CARD.HEIGHT,
+        borderRadius: CARD.BORDER_RADIUS,
+    },
+    gradient: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 160,
+        borderRadius: CARD.BORDER_RADIUS,
+    },
+    formImage: {
+        borderRadius: CARD.BORDER_RADIUS,
+        maxWidth: '100%',
+        maxHeight: SCREEN_HEIGHT,
+        width: SCREEN_WIDTH,
+    }
+});
+
+export { container, button, form, text, list, image }

@@ -1,18 +1,33 @@
-import { useState, useEffect } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
 import { container, button, form, text } from '../../static/styles';
-import { firebase } from '../../database/functions';
+import { firebase, sql } from '../../database/functions';
 import { Snackbar } from 'react-native-paper';
+import { AccountContext } from '../user/Account';
+import ImageViewer from '../etc/ImageViewer';
+
+const PlaceholderImage = require('../../assets/rose.jpg');
 
 export default function EditDateScreen(props) {
     const [title, setTitle] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
     const [isValid, setIsValid] = useState(true);
     const [date, setDate] = useState(null);
+    const {deleteClicked, setDeleteClicked} = useContext(AccountContext);
+    const [height, setHeight] = useState(null);
 
     useEffect(() => {
       setDate(props.route.params.date);
       setTitle(props.route.params.date.title);
+      setSelectedImage(props.route.params.date.image);
     }, []);
+
+    useEffect(() => {
+      if(deleteClicked) { 
+        setDeleteClicked(false);
+        showConfirmDelete();
+       }
+    });
   
     const handleEditDate = () => {
       if (title.length == 0) {
@@ -20,9 +35,29 @@ export default function EditDateScreen(props) {
           return;
       }
   
-      firebase.date.editDate(date.id, title)
+      // firebase.date.editDate(date.id, title)
+      sql.date.editDate(date.id, title)
       .then((res) => { props.navigation.goBack(null) })
       .catch((err) => { console.log(err) });
+    }
+
+    const showConfirmDelete = () => {
+      Alert.alert("Delete Date?",
+        'Are you sure you would like to delete '+date.title+'?',
+        [
+          {
+            text: 'Cancel',
+          },
+          {
+            text: 'Confirm',
+            onPress: () => {handleDeleteDate()},
+          }
+        ], { cancelable: true })
+    }
+
+    const handleDeleteDate = () => {
+      sql.date.deleteDate(date.id)
+      .then((res) => props.navigation.navigate("AccountHome"));
     }
   
     return (
@@ -38,6 +73,16 @@ export default function EditDateScreen(props) {
             onChangeText={text => setTitle(text)}
             style={form.input}
           />
+          <TouchableOpacity
+              style={button.imageButton}
+            >
+              <Text style={button.accentButtonText}>Update Image</Text>
+          </TouchableOpacity>
+          <ImageViewer
+              placeholderImageSource={PlaceholderImage}
+              selectedImage={selectedImage}
+              height={height}
+            />
         </View>
   
         <View style={container.buttonContainer}>

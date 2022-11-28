@@ -5,38 +5,41 @@ import { View } from 'react-native';
 import { container } from './static/styles';
 import HomeScreen from './components/main/Home';
 import StartupScreen from './components/main/Startup';
+import { setupLocalDatabase } from './database/functions';
 
 export class App extends Component {
-  constructor(props) {
-    super()
-    this.state = {
-      loaded: false,
-    }
-  }
+  // constructor(props) {
+  //   super()
+  //   this.state = {
+  //     loaded: false,
+  //   }
+  // }
 
   componentDidMount() {
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        this.setState({ loggedIn: true, loaded: true })
-      } else {
-        this.setState({ loggedIn: false, loaded: true })
-      }
-    });
+    setupLocalDatabase();
+    // onAuthStateChanged(auth, user => {
+    //   if (user) {
+    //     setupLocalDatabase();
+    //     this.setState({ loggedIn: true, loaded: true })
+    //   } else {
+    //     this.setState({ loggedIn: false, loaded: true })
+    //   }
+    // });
   }
 
   render() {
-    if (!this.state.loaded) {
-      return (
-        <View style={container.splash}>
-        </View>
-      )
-    }
+    // if (!this.state.loaded) {
+    //   return (
+    //     <View style={container.splash}>
+    //     </View>
+    //   )
+    // }
 
-    if (!this.state.loggedIn) {
-      return (
-        <StartupScreen />
-      );
-    }
+    // if (!this.state.loggedIn) {
+    //   return (
+    //     <StartupScreen />
+    //   );
+    // }
 
     return (
       <HomeScreen />

@@ -4,7 +4,8 @@ const colors = {
     white: 'white',
     gray: 'gray',
     darkBackground: '#202020',
-    lightBackground: '#dfdfdf'
+    lightBackground: '#dfdfdf',
+    red: 'red'
 };
 
 export { colors }

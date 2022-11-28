@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { container, button } from '../../static/styles';
 import { useState } from 'react';
-import { firebase } from '../../database/functions';
+import { firebase, sql } from '../../database/functions';
 
 export default function RandomScreen(props) {
   const [date, setDate] = useState(null);
 
   const getRandomDate = () => {
-    firebase.date.getRandomDate()
+    // firebase.date.getRandomDate()
+    sql.date.getRandomDate()
     .then((date) => {
       setDate(date);
     });

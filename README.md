@@ -46,12 +46,24 @@ npm install @react-navigation/bottom-tabs
 npm install @react-navigation/drawer
 npx expo install react-native-gesture-handler react-native-reanimated
 ```
--install Top Tab Navigation
+- install Top Tab Navigation
 ```
 npm install @react-navigation/material-top-tabs react-native-tab-view
 npx expo install react-native-pager-view
 ```
--install Keyboard Aware Scroll View to help keyboard inputs remain visible
+- install Keyboard Aware Scroll View to help keyboard inputs remain visible
 ```
 npm i react-native-keyboard-aware-scroll-view --save
+```
+- install axios to make REST API Calls
+```
+npm install axios --save
+```
+- install expo-image-picker to allow users to choose images from their phone gallery
+```
+npx expo install expo-image-picker
+```
+- install SQLite for local database
+```
+npx expo install expo-sqlite
 ```

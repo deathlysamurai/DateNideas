@@ -11,16 +11,16 @@ import { firebase } from '../../database/functions';
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen(props) {
-  const [requestCount, setRequestCount] = useState(null);
+  // const [requestCount, setRequestCount] = useState(null);
 
-  useEffect(() => {
-    firebase.user.getRequests()
-    .then((requests) => {
-      if(requests != null) {
-        setRequestCount(requests.length);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   firebase.user.getRequests()
+  //   .then((requests) => {
+  //     if(requests != null) {
+  //       setRequestCount(requests.length);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <NavigationContainer>
@@ -46,7 +46,8 @@ export default function HomeScreen(props) {
           tabBarInactiveTintColor: colors.gray,
         })}
       >
-        <Tab.Screen name="Account" component={AccountScreen} options={{ tabBarBadge: requestCount, headerShown: false }} />
+        {/* <Tab.Screen name="Account" component={AccountScreen} options={{ tabBarBadge: requestCount, headerShown: false }} /> */}
+        <Tab.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
         <Tab.Screen name="Date" component={DateScreen} options={{ tabBarBadge: null, headerShown: false }} />
         <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} />
       </Tab.Navigator>
