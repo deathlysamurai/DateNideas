@@ -1,4 +1,4 @@
-import { localDB } from ".";
+import { localDB, currentUserID } from ".";
 import axios from 'axios';
 import { IMGUR_CLIENT_ID, IMGUR_BEARER } from "../../static/constants";
 
@@ -6,7 +6,7 @@ export default class dateFunctions {
     static async getCurrentUserDates() {
         return new Promise((resolve, reject) => {
             localDB.transaction((tx) => {
-                tx.executeSql("select * from dates", [], (_, { rows: { _array } }) =>
+                tx.executeSql("select * from dates where userID = ?", [currentUserID], (_, { rows: { _array } }) =>
                     {
                         resolve(_array);
                     }
@@ -16,23 +16,26 @@ export default class dateFunctions {
     }
 
     static async addDate(title, image) {
-        const formData = new FormData();
-        formData.append("image", {
-            uri: image,
-            type: 'image/jpg',
-            name: 'test.jpg'
-        });
+        let link;
+        if(image) {
+            const formData = new FormData();
+            formData.append("image", {
+                uri: image,
+                type: 'image/jpg',
+                name: 'test.jpg'
+            });
 
-        const response = await axios.post('https://api.imgur.com/3/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': IMGUR_CLIENT_ID,
-            },
-        });
-        const link = response.data.data.link;
+            const response = await axios.post('https://api.imgur.com/3/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': IMGUR_CLIENT_ID,
+                },
+            });
+            link = response.data.data.link;
+        }
 
         localDB.transaction((tx) => {
-            tx.executeSql("insert into dates (title, image) values (?, ?)", [title, link]);
+            tx.executeSql("insert into dates (title, image, userID) values (?, ?, ?)", [title, link, currentUserID]);
         });
     }
 

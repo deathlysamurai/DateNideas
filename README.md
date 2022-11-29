@@ -67,3 +67,7 @@ npx expo install expo-image-picker
 ```
 npx expo install expo-sqlite
 ```
+- install expo-application to get a uniqueID to have a user without signing in
+```
+npx expo install expo-application
+```

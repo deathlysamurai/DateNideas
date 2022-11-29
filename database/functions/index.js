@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 import * as SQLite from "expo-sqlite";
 
 export let localDB = null;
+export let currentUserID = null;
 
 export const firebase = {
     user: userFunctions,
@@ -30,8 +31,22 @@ export function setupLocalDatabase() {
     localDB = SQLite.openDatabase("db.db");
 
     localDB.transaction((tx) => {
+        // tx.executeSql(
+        //     "drop table dates;"
+        // );
+        // tx.executeSql(
+        //     "drop table users;"
+        // );
         tx.executeSql(
-            "create table if not exists dates (id integer primary key not null, title text, image text);"
+            "create table if not exists dates (id integer primary key not null, title text, image text, userID integer);"
         );
+        tx.executeSql(
+            "create table if not exists users (id integer primary key not null, uniqueID text);"
+        );
+    });
+
+    sql.user.FindOrCreateCurrentUser().then((user) => { 
+        currentUserID = user.id;
+        console.log("CURRENT USER ID: "+currentUserID)
     });
 }

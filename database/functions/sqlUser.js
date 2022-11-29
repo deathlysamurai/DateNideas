@@ -1,21 +1,40 @@
-import { localDB } from ".";
+import { localDB, currentUserID } from ".";
+import { Platform } from 'expo-modules-core';
+import * as Application from 'expo-application';
 
 export default class userFunctions {
-    static loginUser(email, password) {
-        signInWithEmailAndPassword(auth, email.trim(), password)
-        .then((res) => {})
-        .catch((err) => { 
-            switch(err.code) {
-                case "auth/invalid-email":
-                    alert("Invalid Email, Try Again");
-                    break;
-                case "auth/wrong-password":
-                    alert("Wrong Password, Try Again");
-                    break;
-                default:
-                    alert(err);
-            }
+    static async FindOrCreateCurrentUser() {
+        let uniqueID;
+        if(Platform.OS === 'android') {
+            uniqueID = Application.androidId;
+        } else {
+            uniqueID = await Application.getIosIdForVendorAsync()
+        }
+        let user;
+        user = await new Promise((resolve, reject) => {
+            localDB.transaction((tx) => {
+                tx.executeSql("select * from users where uniqueID = ?", [uniqueID], (_, { rows: { _array } }) =>
+                    {
+                        console.log("FOUND USER");
+                        resolve(_array[0]);
+                    }
+                );
+            });
         });
+        if(!user) {
+            user = await new Promise((resolve, reject) => {
+                localDB.transaction((tx) => {
+                    tx.executeSql("insert into users (uniqueID) values (?)", [uniqueID]);
+                    tx.executeSql("select * from users where uniqueID = ?", [uniqueID], (_, { rows: { _array } }) =>
+                        {
+                            console.log("INSERT USER");
+                            resolve(_array[0]);
+                        }
+                    );
+                });
+            });
+        }        
+        return user;
     }
 
     static async registerUser(email, password, name) {
