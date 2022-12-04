@@ -6,12 +6,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
-import { firebase } from '../../database/functions';
+import { getFirebaseUser } from '../../database/functions';
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen(props) {
   // const [requestCount, setRequestCount] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // useEffect(() => {
   //   firebase.user.getRequests()
@@ -21,6 +22,12 @@ export default function HomeScreen(props) {
   //     }
   //   });
   // }, []);
+
+  useEffect(() => {
+    if(getFirebaseUser() != null) {
+      setLoggedIn(true);
+    }
+  });
 
   return (
     <NavigationContainer>
@@ -49,7 +56,7 @@ export default function HomeScreen(props) {
         {/* <Tab.Screen name="Account" component={AccountScreen} options={{ tabBarBadge: requestCount, headerShown: false }} /> */}
         <Tab.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
         <Tab.Screen name="Date" component={DateScreen} options={{ tabBarBadge: null, headerShown: false }} />
-        <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} />
+        {loggedIn ? <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} /> : null}
       </Tab.Navigator>
     </NavigationContainer>
   )

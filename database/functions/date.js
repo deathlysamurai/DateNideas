@@ -1,5 +1,6 @@
 import { auth, firestore } from "../../database/firebase";
 import { collection, addDoc, setDoc, doc, getDoc, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
+import { firebaseUser } from ".";
 
 export default class dateFunctions {
     static async getCurrentUserDates() {

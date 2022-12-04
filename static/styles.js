@@ -43,6 +43,9 @@ const container = StyleSheet.create({
         borderRadius: 5,
         minWidth: '80%',
     },  
+    swipeContainer: {
+        position: 'absolute',
+    },
 });
 
 const button = StyleSheet.create({
@@ -132,7 +135,7 @@ const list = StyleSheet.create({
 const image = StyleSheet.create({
     dateImage: {
         width: CARD.WIDTH,
-        height: CARD.HEIGHT,
+        height: CARD.HEIGHT - 120,
         borderRadius: CARD.BORDER_RADIUS,
     },
     gradient: {

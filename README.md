@@ -71,3 +71,7 @@ npx expo install expo-sqlite
 ```
 npx expo install expo-application
 ```
+- install expo-splash-screen to deal with splash screen on load
+```
+npx expo install expo-splash-screen
+```

@@ -4,11 +4,12 @@
     "slug": "datenideas-mh469768",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/heart.png",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/heart.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ef233c"
+      "backgroundColor": "#202020"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

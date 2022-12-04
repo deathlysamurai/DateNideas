@@ -21,6 +21,7 @@ export default function DateListItem(props) {
                     onPress={() => props.navigation.navigate("EditDate", {date: date}) }
                 >
                     <Text style={text.center}>{date.title}</Text>
+                    <Text style={text.center}>Price: {date.price}</Text>
                 </TouchableOpacity>
             </View>
         )

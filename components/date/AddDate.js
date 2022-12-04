@@ -5,6 +5,7 @@ import { firebase, sql } from '../../database/functions';
 import { Snackbar } from 'react-native-paper';
 import ImageViewer from '../etc/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
+import PriceContainer from '../etc/PriceContainer';
 
 const PlaceholderImage = require('../../assets/rose.jpg');
 
@@ -13,6 +14,7 @@ export default function AddDateScreen(props) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isValid, setIsValid] = useState(true);
     const [height, setHeight] = useState(null);
+    const [price, setPrice] = useState('free');
   
     const handleAddDate = () => {
       if (title.length == 0) {
@@ -21,7 +23,7 @@ export default function AddDateScreen(props) {
       }
   
       // firebase.date.addDate(title)
-      sql.date.addDate(title, selectedImage)
+      sql.date.addDate(title, selectedImage, price)
       .then((res) => { props.navigation.navigate('AccountHome') })
       .catch((err) => console.log(err));
     }
@@ -30,7 +32,7 @@ export default function AddDateScreen(props) {
       let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        console.log("Permission to access camera roll is required!")
+        alert("Permission to access camera roll is required!")
         return;
       }
 
@@ -60,6 +62,7 @@ export default function AddDateScreen(props) {
               onChangeText={text => setTitle(text)}
               style={form.input}
             />
+            <PriceContainer changePrice={setPrice} />
             <TouchableOpacity
               onPress={pickImageAsync}
               style={button.imageButton}

@@ -15,7 +15,6 @@ export default class userFunctions {
             localDB.transaction((tx) => {
                 tx.executeSql("select * from users where uniqueID = ?", [uniqueID], (_, { rows: { _array } }) =>
                     {
-                        console.log("FOUND USER");
                         resolve(_array[0]);
                     }
                 );
@@ -27,7 +26,6 @@ export default class userFunctions {
                     tx.executeSql("insert into users (uniqueID) values (?)", [uniqueID]);
                     tx.executeSql("select * from users where uniqueID = ?", [uniqueID], (_, { rows: { _array } }) =>
                         {
-                            console.log("INSERT USER");
                             resolve(_array[0]);
                         }
                     );

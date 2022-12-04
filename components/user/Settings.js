@@ -1,18 +1,31 @@
 import { View, TouchableOpacity, Text } from 'react-native';
 import { container, button } from '../../static/styles';
-import { firebase } from '../../database/functions';
+import { firebase, getFirebaseUser } from '../../database/functions';
+import { useEffect, useState } from 'react';
+import StartupScreen from '../main/Startup';
 
 export default function SettingsScreen(props) {
-  // Use this area to create an account
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if(getFirebaseUser() !== null) {
+      setLoggedIn(true);
+    }
+  });
+
   return (
     <View style={container.container}>
         <View style={container.buttonContainer}>
-          <Text>Settings</Text>
-            {/* <TouchableOpacity 
-                style={button.mainButton}
-                onPress={() => firebase.user.logoutUser()}>
-                <Text>Log Out</Text>
-            </TouchableOpacity> */}
+            { loggedIn ? 
+                <TouchableOpacity 
+                  style={button.mainButton}
+                  onPress={() => firebase.user.logoutUser()}>
+                    <Text>Log Out</Text>
+                </TouchableOpacity> :
+                <View style={{minWidth: '100%'}}>
+                  <StartupScreen />
+                </View>
+            }
         </View>
     </View>
   )

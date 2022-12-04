@@ -7,6 +7,13 @@ import * as SQLite from "expo-sqlite";
 
 export let localDB = null;
 export let currentUserID = null;
+let firebaseUser = null;
+export function setFirebaseUser(user) {
+  firebaseUser = user;
+}
+export function getFirebaseUser() {
+  return firebaseUser;
+}
 
 export const firebase = {
     user: userFunctions,
@@ -38,7 +45,7 @@ export function setupLocalDatabase() {
         //     "drop table users;"
         // );
         tx.executeSql(
-            "create table if not exists dates (id integer primary key not null, title text, image text, userID integer);"
+            "create table if not exists dates (id integer primary key not null, title text, image text, userID integer, price text);"
         );
         tx.executeSql(
             "create table if not exists users (id integer primary key not null, uniqueID text);"
@@ -47,6 +54,5 @@ export function setupLocalDatabase() {
 
     sql.user.FindOrCreateCurrentUser().then((user) => { 
         currentUserID = user.id;
-        console.log("CURRENT USER ID: "+currentUserID)
     });
 }

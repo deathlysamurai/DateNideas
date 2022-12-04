@@ -1,11 +1,14 @@
 import { auth, firestore } from "../../database/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { collection, addDoc, setDoc, doc, getDoc, query, where, getDocs } from "firebase/firestore";
+import { setFirebaseUser } from ".";
 
 export default class userFunctions {
     static loginUser(email, password) {
         signInWithEmailAndPassword(auth, email.trim(), password)
-        .then((res) => {})
+        .then((res) => {
+            setFirebaseUser(auth.currentUser);
+        })
         .catch((err) => { 
             switch(err.code) {
                 case "auth/invalid-email":
@@ -35,6 +38,7 @@ export default class userFunctions {
 
     static logoutUser() {
         signOut(auth);
+        setFirebaseUser(null);
     }
 
     static async getCurrentUser() {
