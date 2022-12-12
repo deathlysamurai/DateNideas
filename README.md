@@ -75,3 +75,7 @@ npx expo install expo-application
 ```
 npx expo install expo-splash-screen
 ```
+- install expo-web-browser to link to external sites
+```
+expo install expo-web-browser
+```
